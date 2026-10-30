@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "بادیگارد | لیست قیمت دوربین مداربسته",
+      "hasCanvas": false,
+      "bodyTextLen": 3277,
+      "bodyTextHash": "813c531f1098fa659e012a5207d86aa96c6fdc2f208ca84e9289f5981357b0a0",
+      "bodyTextPrefix": "لیست قیمت رسمی بادیگارد BODYGUARD فروش، نصب و پشتیبانی دوربین مد",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "بادیگارد | لیست قیمت دوربین مداربسته",
+      "hasCanvas": false,
+      "bodyTextLen": 3277,
+      "bodyTextHash": "813c531f1098fa659e012a5207d86aa96c6fdc2f208ca84e9289f5981357b0a0",
+      "bodyTextPrefix": "لیست قیمت رسمی بادیگارد BODYGUARD فروش، نصب و پشتیبانی دوربین مد",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

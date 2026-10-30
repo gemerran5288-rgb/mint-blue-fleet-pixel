@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>بادیگارد | لیست قیمت دوربین مداربسته</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap">
+  <style>
+    :root {
+      --ink: #14181e;
+      --paper: #f3efe6;
+      --sheet: #fffdf8;
+      --muted: #5e6772;
+      --line: #e3d9c6;
+      --navy: #101820;
+      --gold: #b8923a;
+      --gold-soft: #f4e7c6;
+      --on-navy: #f6f1e6;
+      --on-gold: #1a1408;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: Vazirmatn, Tahoma, "Segoe UI", sans-serif; }
+    button, input, select, textarea { font-family: inherit; }
+    button { cursor: pointer; }
+    img { max-width: 100%; display: block; }
+    .bar { height: 6px; background: var(--gold); }
+    header.mast { background: var(--navy); color: var(--on-navy); }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 28px 16px; }
+    .brand { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .logo { width: 112px; height: 112px; object-fit: cover; border: 1px solid var(--gold); border-radius: 12px; background: var(--navy); }
+    .eyebrow { margin: 0; color: var(--gold-soft); font-size: 14px; }
+    h1 { margin: 4px 0 0; font-size: 40px; line-height: 1.3; }
+    .latin { margin: 8px 0 0; color: var(--gold); letter-spacing: 0.18em; font-weight: 800; font-size: 14px; text-align: left; direction: ltr; }
+    .tag { margin: 10px 0 0; }
+    .hi { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 14px 0 0; padding: 0; list-style: none; color: var(--gold-soft); font-size: 14px; }
+    .rule { height: 1px; background: var(--gold); }
+    .contacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 18px 16px 22px; }
+    .contacts p { margin: 2px 0 0; }
+    .k { color: var(--gold-soft); font-size: 12px; }
+    .sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .tools, .filters, .editor, .banner { padding: 12px 16px; }
+    .tools, .add-row, .row-actions, .confirm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .search { position: relative; flex: 1; min-width: 180px; }
+    input, select, textarea {
+      width: 100%; border: 1px solid var(--line); background: var(--sheet); color: var(--ink);
+      border-radius: 10px; min-height: 44px; padding: 8px 12px;
+    }
+    textarea { min-height: 96px; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+    button.gold, button.navy, button.ghost {
+      min-height: 44px; border-radius: 10px; padding: 8px 14px; font-weight: 700; font-size: 14px;
+    }
+    button.gold { background: var(--gold); color: var(--on-gold); border: 1px solid var(--gold); }
+    button.navy { background: var(--navy); color: var(--on-navy); border: 1px solid var(--navy); }
+    button.ghost { background: var(--sheet); color: var(--ink); border: 1px solid var(--line); }
+    button:disabled { opacity: 0.4; }
+    .filters { display: flex; gap: 8px; overflow-x: auto; border-bottom: 1px solid var(--line); }
+    .chip { flex: 0 0 auto; border-radius: 999px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); background: var(--sheet); }
+    .chip.on { background: var(--navy); color: var(--on-navy); border-color: var(--navy); }
+    .title-row, .foot, .cathead { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .title-row, .foot { padding: 16px; }
+    .title-row { border-bottom: 1px solid var(--line); }
+    .cathead { background: var(--navy); color: var(--on-navy); padding: 12px 16px; }
+    .cathead h2 { margin: 0; font-size: 16px; }
+    .dot { width: 8px; height: 8px; border-radius: 99px; background: var(--gold); display: inline-block; }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    .row:nth-child(odd) { background: var(--paper); }
+    .idx { width: 32px; color: var(--navy); font-weight: 700; }
+    .main { display: flex; gap: 10px; min-width: 0; flex: 1; }
+    .name { margin: 0; font-weight: 700; }
+    .spec { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+    .note { display: inline-block; margin-top: 6px; border: 1px solid var(--gold); border-radius: 99px; padding: 2px 8px; font-size: 12px; }
+    .price { width: 148px; text-align: left; }
+    .price b { display: block; font-size: 18px; }
+    .price .off { color: var(--muted); text-decoration: line-through; }
+    .price small { color: var(--muted); }
+    .stock { display: inline-flex; margin-top: 4px; border-radius: 99px; padding: 2px 8px; font-size: 12px; }
+    .stock.in { background: var(--gold-soft); color: var(--on-gold); }
+    .stock.out { border: 1px solid var(--line); color: var(--muted); }
+    .editor { background: var(--paper); border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+    .grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    label { display: grid; gap: 4px; font-size: 13px; }
+    .banner { background: var(--gold-soft); color: var(--on-gold); }
+    .empty { padding: 28px 16px; text-align: center; color: var(--muted); }
+    .stack { display: grid; gap: 8px; }
+    .check { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+    .muted { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .field-on-navy { width: 100%; background: transparent; color: var(--on-navy); border: 0; border-bottom: 1px solid var(--gold); border-radius: 0; min-height: 40px; }
+    @media (max-width: 720px) {
+      h1 { font-size: 32px; }
+      .contacts, .grid { grid-template-columns: 1fr; }
+      .price { width: 112px; }
+      .price b { font-size: 16px; }
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; }
+      .mast, .cathead, .stock.in { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bar"></div>
+  <div id="app"></div>
+  <script id="catalog-data" type="application/json">__CATALOG_JSON__</script>
+  <script>
+    const fa = "۰۱۲۳۴۵۶۷۸۹";
+    const ar = "٠١٢٣٤٥٦٧٨٩";
+    let data = JSON.parse(document.getElementById("catalog-data").textContent);
+    let editing = false;
+    let query = "";
+    let active = "all";
+    let dirty = false;
+    let banner = "";
+    let pending = null;
+
+    const app = document.getElementById("app");
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+        "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;"
+      }[ch]));
+    }
+    function money(value) {
+      return new Intl.NumberFormat("fa-IR").format(value);
+    }
+    function parseAmount(raw) {
+      const text = String(raw).trim();
+      if (!text) return null;
+      const normalized = text
+        .replace(/[۰-۹]/g, (d) => String(fa.indexOf(d)))
+        .replace(/[٠-٩]/g, (d) => String(ar.indexOf(d)))
+        .replace(/[^\d]/g, "");
+      if (!normalized) return null;
+      return Number(normalized);
+    }
+    function uid(prefix) {
+      return prefix + "-" + Math.random().toString(36).slice(2, 9);
+    }
+    function norm(value) {
+      return String(value).replace(/ي/g, "ی").replace(/ك/g, "ک").replace(/\u200c/g, " ").replace(/\s+/g, " ").trim();
+    }
+    function matches(product, categoryName) {
+      if (!query.trim()) return true;
+      const hay = norm(categoryName + " " + product.name + " " + product.spec + " " + product.note + " " + product.unit + " " + product.price);
+      return hay.includes(norm(query));
+    }
+    function mark() { dirty = true; }
+
+    function field(bind, value, label, extra) {
+      return '<label>' + esc(label) + '<input data-bind="' + esc(bind) + '" value="' + esc(value) + '" ' + (extra || "") + '></label>';
+    }
+
+    function render() {
+      const shop = data.shop;
+      const focus = document.activeElement;
+      const focusBind = focus && focus.dataset ? focus.dataset.bind : "";
+      const focusId = focus && focus.id;
+      const caret = focus && typeof focus.selectionStart === "number" ? focus.selectionStart : null;
+      const highlights = String(shop.highlights || "").split("·").map((item) => item.trim()).filter(Boolean);
+      const sections = data.categories
+        .filter((category) => active === "all" || category.id === active)
+        .map((category) => ({
+          category,
+          items: data.products.filter((product) => product.categoryId === category.id && matches(product, category.name))
+        }))
+        .filter((section) => (editing && !query.trim()) || section.items.length > 0);
+      const visible = sections.reduce((sum, section) => sum + section.items.length, 0);
+
+      const contacts = [
+        ["phone", "تلفن فروشگاه"],
+        ["mobile", "همراه"],
+        ["social", "اینستاگرام"],
+        ["hours", "ساعت کاری"],
+        ["license", "پروانه کسب"],
+        ["validUntil", "اعتبار فهرست"]
+      ];
+
+      let contactHtml = contacts.map(([key, label]) => {
+        if (!editing && !String(shop[key] || "").trim()) return "";
+        const body = editing
+          ? '<input class="field-on-navy" data-bind="shop:' + key + '" value="' + esc(shop[key]) + '" aria-label="' + esc(label) + '">'
+          : "<p>" + esc(shop[key]) + "</p>";
+        return '<div><div class="k">' + esc(label) + '</div>' + body + "</div>";
+      }).join("");
+      const addressBody = editing
+        ? '<input class="field-on-navy" data-bind="shop:address" value="' + esc(shop.address) + '" aria-label="نشانی">'
+        : "<p>" + esc(shop.address) + "</p>";
+      if (editing || String(shop.address || "").trim()) {
+        contactHtml += '<div style="grid-column:1/-1"><div class="k">نشانی</div>' + addressBody + "</div>";
+      }
+
+      let head = '<header class="mast"><div class="wrap brand">';
+      head += '<div><img class="logo" alt="نشان تجاری ' + esc(shop.name) + '" src="' + esc(shop.logo) + '">';
+      if (editing) {
+        head += '<div class="no-print" style="margin-top:8px"><button class="gold" type="button" data-act="logo">تعویض نشان</button></div>';
+      }
+      head += "</div><div style=\"flex:1;min-width:220px\">";
+      head += '<p class="eyebrow">لیست قیمت رسمی</p>';
+      if (editing) {
+        head += '<input class="field-on-navy" style="font-size:36px;font-weight:800" data-bind="shop:name" value="' + esc(shop.name) + '" aria-label="نام فروشگاه">';
+        head += '<input class="field-on-navy latin" data-bind="shop:latin" dir="ltr" value="' + esc(shop.latin) + '" aria-label="نام لاتین">';
+        head += '<input class="field-on-navy" data-bind="shop:tagline" value="' + esc(shop.tagline) + '" aria-label="شعار">';
+        head += '<input class="field-on-navy" data-bind="shop:highlights" value="' + esc(shop.highlights) + '" aria-label="نوار اعتماد">';
+      } else {
+        head += "<h1>" + esc(shop.name) + "</h1>";
+        if (String(shop.latin || "").trim()) head += '<p class="latin">' + esc(shop.latin) + "</p>";
+        head += '<p class="tag">' + esc(shop.tagline) + "</p>";
+        head += '<ul class="hi">' + highlights.map((item) => "<li>" + esc(item) + "</li>").join("") + "</ul>";
+      }
+      head += "</div></div><div class=\"rule\"></div><div class=\"wrap contacts\">" + contactHtml + "</div></header>";
+
+      let tools = '<div class="no-print tools">';
+      tools += '<div class="search"><input id="q" type="search" placeholder="جستجوی کالا، برند یا مشخصات" value="' + esc(query) + '" aria-label="جستجو"></div>';
+      tools += '<button class="' + (editing ? "navy" : "gold") + '" type="button" data-act="toggle">' + (editing ? "پایان ویرایش" : "ویرایش") + "</button>";
+      tools += '<button class="ghost" type="button" data-act="print">چاپ</button>';
+      tools += '<button class="ghost" type="button" data-act="save">ذخیره HTML</button>';
+      tools += "</div>";
+
+      let bannerHtml = banner ? '<div class="no-print banner" role="status">' + esc(banner) + ' <button class="ghost" type="button" data-act="clear-banner">بستن</button></div>' : "";
+
+      let editor = "";
+      if (editing) {
+        editor = '<form class="editor no-print" data-act="add-form"><p style="margin:0;font-weight:800">کالای تازه</p><div class="grid">';
+        editor += '<label>دسته<select data-bind="draft:categoryId" id="draft-cat">' + data.categories.map((category) => '<option value="' + esc(category.id) + '"' + (draft.categoryId === category.id ? " selected" : "") + ">" + esc(category.name) + "</option>").join("") + "</select></label>";
+        editor += field("draft:name", draft.name, "نام کالا");
+        editor += '<label style="grid-column:1/-1">مشخصات<input data-bind="draft:spec" value="' + esc(draft.spec) + '"></label>';
+        editor += field("draft:unit", draft.unit, "واحد");
+        editor += '<label>قیمت (' + esc(shop.currency || "تومان") + ')<input data-bind="draft:price" inputmode="numeric" value="' + esc(draft.price) + '" placeholder="۰ برای رایگان"></label>';
+        editor += field("draft:note", draft.note, "یادداشت کوتاه");
+        editor += '<label class="check"><input type="checkbox" data-bind="draft:inStock"' + (draft.inStock ? " checked" : "") + "> موجود است</label>";
+        editor += '</div><div class="add-row"><button class="gold" type="submit">افزودن کالا</button></div>';
+        editor += '<div class="add-row"><label style="flex:1">دسته تازه<input id="new-cat" value="' + esc(newCat) + '" data-bind="ui:newCat"></label><button class="ghost" type="button" data-act="add-cat">ساخت دسته</button></div>';
+        editor += '<p class="muted">تغییرها داخل همین فایل می‌مانند. برای نگه داشتن‌شان روی رایانه، «ذخیره HTML» را بزنید و فایل تازه را جایگزین کنید.</p></form>';
+      }
+
+      let chips = '<div class="filters no-print"><button type="button" class="chip' + (active === "all" ? " on" : "") + '" data-act="cat" data-id="all">همه</button>';
+      data.categories.forEach((category) => {
+        const count = data.products.filter((product) => product.categoryId === category.id && matches(product, category.name)).length;
+        if (query.trim() && count === 0) return;
+        if (!editing && count === 0 && !query.trim()) return;
+        chips += '<button type="button" class="chip' + (active === category.id ? " on" : "") + '" data-act="cat" data-id="' + esc(category.id) + '">' + esc(category.name) + " " + money(count) + "</button>";
+      });
+      chips += "</div>";
+
+      let body = "";
+      let running = 0;
+      if (!sections.length) {
+        body = '<p class="empty">' + (query.trim() ? "کالایی با این عبارت پیدا نشد." : "هنوز کالایی در فهرست نیست.") + "</p>";
+      }
+      sections.forEach((section) => {
+        const category = section.category;
+        const index = data.categories.findIndex((item) => item.id === category.id);
+        body += '<section><header class="cathead"><span class="dot"></span>';
+        if (editing) {
+          body += '<input class="field-on-navy" data-bind="cat:' + esc(category.id) + ':name" value="' + esc(category.name) + '" aria-label="نام دسته">';
+        } else {
+          body += "<h2>" + esc(category.name) + "</h2>";
+        }
+        body += "<span>" + money(section.items.length) + " قلم</span>";
+        if (editing && !query.trim()) {
+          body += '<button class="ghost" type="button" data-act="cup" data-id="' + esc(category.id) + '"' + (index === 0 ? " disabled" : "") + ">بالا</button>";
+          body += '<button class="ghost" type="button" data-act="cdown" data-id="' + esc(category.id) + '"' + (index === data.categories.length - 1 ? " disabled" : "") + ">پایین</button>";
+          body += '<button class="ghost" type="button" data-act="cdel" data-id="' + esc(category.id) + '">حذف دسته</button>';
+        }
+        body += "</header>";
+        if (pending && pending.kind === "category" && pending.id === category.id) {
+          body += '<div class="confirm no-print" style="padding:10px 16px"><span>این دسته و کالاهایش حذف شود؟</span><button class="navy" type="button" data-act="cdel-yes" data-id="' + esc(category.id) + '">حذف</button><button class="ghost" type="button" data-act="cancel">انصراف</button></div>';
+        }
+        if (!section.items.length) body += '<p class="empty">در این دسته هنوز کالایی نیست.</p>';
+        section.items.forEach((product, itemIndex) => {
+          running += 1;
+          body += '<article class="row"><div class="main"><span class="idx">' + money(running) + "</span><div style=\"flex:1;min-width:0\">";
+          if (editing) {
+            body += '<div class="stack">';
+            body += '<input data-bind="item:' + esc(product.id) + ':name" value="' + esc(product.name) + '" aria-label="نام کالا">';
+            body += '<input data-bind="item:' + esc(product.id) + ':spec" value="' + esc(product.spec) + '" aria-label="مشخصات">';
+            body += '<div class="grid"><select data-bind="item:' + esc(product.id) + ':categoryId" aria-label="دسته">';
+            data.categories.forEach((item) => {
+              body += '<option value="' + esc(item.id) + '"' + (item.id === product.categoryId ? " selected" : "") + ">" + esc(item.name) + "</option>";
+            });
+            body += '</select><input data-bind="item:' + esc(product.id) + ':unit" value="' + esc(product.unit) + '" aria-label="واحد"></div>';
+            body += '<input data-bind="item:' + esc(product.id) + ':note" value="' + esc(product.note) + '" aria-label="یادداشت" placeholder="یادداشت">';
+            body += "</div>";
+          } else {
+            body += '<p class="name">' + esc(product.name) + "</p>";
+            body += '<p class="spec">' + esc(product.spec) + (product.spec && product.unit ? " · " : "") + (product.unit ? "واحد: " + esc(product.unit) : "") + "</p>";
+            if (product.note) body += '<span class="note">' + esc(product.note) + "</span>";
+          }
+          body += '</div></div><div class="price">';
+          if (editing) {
+            body += '<input data-bind="item:' + esc(product.id) + ':price" inputmode="numeric" value="' + esc(product.price) + '" aria-label="قیمت">';
+            body += '<button class="' + (product.inStock ? "gold" : "ghost") + '" type="button" data-act="stock" data-id="' + esc(product.id) + '">' + (product.inStock ? "موجود" : "ناموجود") + "</button>";
+          } else if (product.price === 0) {
+            body += "<b>رایگان</b>";
+          } else {
+            body += '<b class="' + (product.inStock ? "" : "off") + '">' + money(product.price) + "</b><small>" + esc(shop.currency) + "</small>";
+          }
+          if (!editing) body += '<div><span class="stock ' + (product.inStock ? "in" : "out") + '">' + (product.inStock ? "موجود" : "ناموجود") + "</span></div>";
+          body += "</div></article>";
+          if (editing && !query.trim()) {
+            body += '<div class="row-actions no-print" style="padding:0 16px 12px">';
+            body += '<button class="ghost" type="button" data-act="up" data-id="' + esc(product.id) + '"' + (itemIndex === 0 ? " disabled" : "") + ">بالا</button>";
+            body += '<button class="ghost" type="button" data-act="down" data-id="' + esc(product.id) + '"' + (itemIndex === section.items.length - 1 ? " disabled" : "") + ">پایین</button>";
+            body += '<button class="ghost" type="button" data-act="del" data-id="' + esc(product.id) + '">حذف کالا</button>';
+            body += "</div>";
+            if (pending && pending.kind === "product" && pending.id === product.id) {
+              body += '<div class="confirm no-print" style="padding:0 16px 12px"><span>حذف شود؟</span><button class="navy" type="button" data-act="del-yes" data-id="' + esc(product.id) + '">حذف</button><button class="ghost" type="button" data-act="cancel">انصراف</button></div>';
+            }
+          }
+        });
+        body += "</section>";
+      });
+
+      let foot = '<footer class="foot" style="display:block;border-top:1px solid var(--line)">';
+      if (editing) {
+        foot += '<label>یادداشت پایین فهرست<textarea data-bind="shop:footer">' + esc(shop.footer) + "</textarea></label>";
+        foot += '<label style="margin-top:8px">واحد پول<input data-bind="shop:currency" value="' + esc(shop.currency) + '"></label>';
+      } else {
+        foot += '<p class="muted">' + esc(shop.footer) + "</p>";
+      }
+      foot += '<div class="title-row" style="padding:12px 0 0"><b>' + esc(shop.name) + "</b><span class=\"muted\">" + esc([shop.phone, shop.mobile, shop.validUntil].filter((item) => String(item || "").trim()).join(" · ")) + "</span></div></footer>";
+
+      app.innerHTML = head + '<div class="wrap" style="display:grid;gap:12px">' + tools + bannerHtml + '<article class="sheet"><div class="title-row"><b>فهرست قیمت کالا و خدمات</b><span class="muted">' + money(visible) + " قلم</span></div>" + chips + editor + body + foot + "</article></div>";
+      app.insertAdjacentHTML("beforeend", '<input id="logo-file" class="no-print" type="file" accept="image/*" hidden>');
+
+      const next = (focusBind && app.querySelector('[data-bind="' + CSS.escape(focusBind) + '"]')) || (focusId && document.getElementById(focusId));
+      if (next) {
+        next.focus();
+        if (caret != null && next.setSelectionRange) {
+          try { next.setSelectionRange(caret, caret); } catch (err) {}
+        }
+      }
+    }
+
+    let draft = { categoryId: data.categories[0] ? data.categories[0].id : "", name: "", spec: "", unit: "دستگاه", price: "", note: "", inStock: true };
+    let newCat = "";
+
+    function setBind(bind, value, checked) {
+      const parts = bind.split(":");
+      if (parts[0] === "shop") data.shop[parts[1]] = value;
+      else if (parts[0] === "cat") {
+        const category = data.categories.find((item) => item.id === parts[1]);
+        if (category) category.name = value;
+      } else if (parts[0] === "item") {
+        const product = data.products.find((item) => item.id === parts[1]);
+        if (!product) return;
+        if (parts[2] === "price") product.price = parseAmount(value) ?? 0;
+        else product[parts[2]] = value;
+      } else if (parts[0] === "draft") {
+        draft[parts[1]] = parts[1] === "inStock" ? checked : value;
+        return;
+      } else if (parts[0] === "ui" && parts[1] === "newCat") {
+        newCat = value;
+        return;
+      }
+      mark();
+    }
+
+    function move(list, index, dir) {
+      const next = index + dir;
+      if (index < 0 || next < 0 || next >= list.length) return;
+      const item = list[index];
+      list[index] = list[next];
+      list[next] = item;
+    }
+
+    app.addEventListener("input", (event) => {
+      const el = event.target;
+      if (el.id === "q") {
+        query = el.value;
+        render();
+        return;
+      }
+      if (!el.dataset.bind) return;
+      setBind(el.dataset.bind, el.value, el.checked);
+      if (el.dataset.bind.startsWith("draft:") || el.dataset.bind === "ui:newCat") return;
+    });
+    app.addEventListener("change", (event) => {
+      const el = event.target;
+      if (!el.dataset.bind) return;
+      setBind(el.dataset.bind, el.value, el.checked);
+      if (el.tagName === "SELECT" || el.type === "checkbox") render();
+    });
+    app.addEventListener("submit", (event) => {
+      if (!event.target.closest("[data-act='add-form']")) return;
+      event.preventDefault();
+      if (!draft.name.trim()) { banner = "نام کالا را بنویسید."; render(); return; }
+      const price = parseAmount(draft.price);
+      if (price == null) { banner = "قیمت را به عدد بنویسید. برای رایگان صفر بگذارید."; render(); return; }
+      if (!data.categories.some((category) => category.id === draft.categoryId)) { banner = "اول یک دسته بسازید."; render(); return; }
+      data.products.push({
+        id: uid("p"),
+        categoryId: draft.categoryId,
+        name: draft.name.trim(),
+        spec: draft.spec.trim(),
+        unit: draft.unit.trim() || "عدد",
+        price,
+        inStock: !!draft.inStock,
+        note: draft.note.trim()
+      });
+      draft.name = ""; draft.spec = ""; draft.price = ""; draft.note = "";
+      banner = "کالا اضافه شد. برای ماندن در فایل، ذخیره HTML را بزنید.";
+      mark();
+      render();
+    });
+    app.addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-act]");
+      if (!btn || btn.tagName === "FORM") return;
+      const act = btn.dataset.act;
+      const id = btn.dataset.id;
+      if (act === "toggle") { editing = !editing; pending = null; render(); return; }
+      if (act === "print") { window.print(); return; }
+      if (act === "save") { downloadHtml(); return; }
+      if (act === "clear-banner") { banner = ""; render(); return; }
+      if (act === "cat") { active = id; render(); return; }
+      if (act === "logo") { document.getElementById("logo-file").click(); return; }
+      if (act === "add-cat") {
+        const name = newCat.trim();
+        if (!name) { banner = "نام دسته را بنویسید."; render(); return; }
+        const catId = uid("cat");
+        data.categories.push({ id: catId, name });
+        draft.categoryId = catId;
+        newCat = "";
+        banner = "دسته اضافه شد.";
+        mark();
+        render();
+        return;
+      }
+      if (act === "stock") {
+        const product = data.products.find((item) => item.id === id);
+        if (product) product.inStock = !product.inStock;
+        mark(); render(); return;
+      }
+      if (act === "up" || act === "down") {
+        const product = data.products.find((item) => item.id === id);
+        if (!product) return;
+        const same = data.products.filter((item) => item.categoryId === product.categoryId);
+        const index = same.findIndex((item) => item.id === id);
+        const swapWith = same[index + (act === "up" ? -1 : 1)];
+        if (!swapWith) return;
+        const from = data.products.indexOf(product);
+        const to = data.products.indexOf(swapWith);
+        data.products[from] = swapWith;
+        data.products[to] = product;
+        mark(); render(); return;
+      }
+      if (act === "cup" || act === "cdown") {
+        move(data.categories, data.categories.findIndex((item) => item.id === id), act === "cup" ? -1 : 1);
+        mark(); render(); return;
+      }
+      if (act === "del") { pending = { kind: "product", id }; render(); return; }
+      if (act === "cdel") { pending = { kind: "category", id }; render(); return; }
+      if (act === "cancel") { pending = null; render(); return; }
+      if (act === "del-yes") {
+        data.products = data.products.filter((item) => item.id !== id);
+        pending = null; mark(); render(); return;
+      }
+      if (act === "cdel-yes") {
+        data.categories = data.categories.filter((item) => item.id !== id);
+        data.products = data.products.filter((item) => item.categoryId !== id);
+        if (active === id) active = "all";
+        pending = null; mark(); render();
+      }
+    });
+
+    app.addEventListener("change", (event) => {
+      if (event.target.id !== "logo-file") return;
+      const file = event.target.files && event.target.files[0];
+      event.target.value = "";
+      if (!file) return;
+      if (!file.type.startsWith("image/")) { banner = "فقط تصویر برای نشان مجاز است."; render(); return; }
+      if (file.size > 900000) { banner = "حجم نشان را کمتر از ۹۰۰ کیلوبایت انتخاب کنید."; render(); return; }
+      const reader = new FileReader();
+      reader.onload = () => { data.shop.logo = String(reader.result || ""); mark(); render(); };
+      reader.readAsDataURL(file);
+    });
+
+    window.addEventListener("beforeunload", (event) => {
+      if (!dirty) return;
+      event.preventDefault();
+      event.returnValue = "";
+    });
+
+    function downloadHtml() {
+      const node = document.getElementById("catalog-data");
+      node.textContent = JSON.stringify(data);
+      const prev = app.innerHTML;
+      app.innerHTML = "";
+      const blob = new Blob(["<!DOCTYPE html>\n" + document.documentElement.outerHTML], { type: "text/html;charset=utf-8" });
+      app.innerHTML = prev;
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "bodyguard-pricelist.html";
+      link.click();
+      URL.revokeObjectURL(link.href);
+      dirty = false;
+      banner = "فایل HTML ذخیره شد.";
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
